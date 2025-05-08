@@ -15,8 +15,8 @@ services:
     ports:
       - "4000:4000"
     environment:
-      - AWS_IAM_USER_KEY=AKIATX3PIHQYKKFDZ5VU
-      - AWS_IAM_USER_SECRET=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
+      - AWS_IAM_USER_KEY= 
+      - AWS_IAM_USER_SECRET=
       - AWS_BUCKET_NAME=insta-bucket-sidraut007
       - MONGO_URI=mongodb://mongo:27017/Instagram
     depends_on:
