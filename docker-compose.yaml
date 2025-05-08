@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - insta-net
+
+  insta-backend:
+    image: insta-backend
+    container_name: insta-backend
+    ports:
+      - "4000:4000"
+    environment:
+      - AWS_IAM_USER_KEY=AKIATX3PIHQYKKFDZ5VU
+      - AWS_IAM_USER_SECRET=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
+      - AWS_BUCKET_NAME=insta-bucket-sidraut007
+      - MONGO_URI=mongodb://mongo:27017/Instagram
+    depends_on:
+      - mongo
+    networks:
+      - insta-net
+
+  insta-frontend:
+    image: insta-frontend
+    container_name: insta-frontend
+    ports:
+      - "80:80"
+    environment:
+      - REACT_APP_API_URL=http://insta-backend:4000
+    networks:
+      - insta-net
+
+networks:
+  insta-net:
+    driver: bridge
